@@ -23,6 +23,32 @@ class Sigmoid(Activation):
 
         super().__init__(sigmoid, sigmoid_prime)
 
+
+class Linear(Activation):
+    def __init__(self):
+        def linear(input):
+            return input
+
+        def linear_prime(input):
+            return 1
+
+        super().__init__(linear, linear_prime)
+
+
+
+class Relu(Activation):
+    def __init__(self):
+        def relu(input):
+            self.input = input
+            self.A = np.maximum(0, input)
+            return self.A
+
+        def relu_prime(dLdA):
+            return dLdA * (self.A != 0)
+
+        super().__init__(relu, relu_prime)
+
+
 class Softmax(Layer):
     def forward(self, input):
         tmp = np.exp(input)
